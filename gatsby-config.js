@@ -9,6 +9,7 @@ module.exports = {
       'Thoughts on coding, crypto and other tidbits.',
     copyright: '© All rights reserved.',
     disqusShortname: '',
+    pathPrefix: '/a21n',
     menu: [
       {
         label: 'Posts',
