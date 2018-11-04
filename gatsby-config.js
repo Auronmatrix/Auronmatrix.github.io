@@ -4,7 +4,7 @@ const pxtorem = require('postcss-pxtorem')
 module.exports = {
   siteMetadata: {
     url: 'https://lumen.netlify.com',
-    title: 'A21n',
+    title: 'Aubrey Oosthuizen Blog',
     subtitle:
       'Thoughts on coding, crypto and other tidbits.',
     copyright: '© All rights reserved.',

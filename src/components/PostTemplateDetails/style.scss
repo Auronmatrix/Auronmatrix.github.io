@@ -161,6 +161,14 @@
             margin: 0;
             top: 30px;
             left: 30px;
+            background-color: transparent;
+            border: 1px solid $color-primary;
+            color: $color-primary;
+            &:hover{
+                background-color: transparent;
+                border: 1px solid $color-secondary;
+                color: $color-secondary;
+            }
         }
     }
 }
