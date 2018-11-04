@@ -1,7 +1,7 @@
 {
   "version": "3.0.0",
-  "name": "gatsby-v2-starter-lumen",
-  "description": "Simple starter for Gatsby",
+  "name": "a21n-blog",
+  "description": "Aubrey Oosthuizen blog",
   "main": "n/a",
   "scripts": {
     "develop": "gatsby develop",
@@ -13,15 +13,16 @@
     "format": "prettier --write './*.js' 'src/**/*.js' 'src/**/*.jsx'",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
-  "repository": "git+https://github.com/alxshelepenok/gatsby-starter-lumen.git",
+  "repository": "",
   "keywords": [
-    "gatsby",
     "blog",
-    "react",
-    "theme",
-    "starter"
+    "computer science",
+    "docker",
+    "dev-ops",
+    "cryptocurrencies",
+    "bitcoin"
   ],
-  "author": "Alexander Shelepenok <alxshelepenok@gmail.com>",
+  "author": "Aubrey Oosthuizen",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -36,6 +37,7 @@
     "gatsby-plugin-sharp": "^2.0.6",
     "gatsby-plugin-sitemap": "^2.0.1",
     "gatsby-remark-copy-linked-files": "^2.0.5",
+    "gatsby-remark-embed-gist": "^1.1.3",
     "gatsby-remark-images": "^2.0.4",
     "gatsby-remark-prismjs": "^3.0.2",
     "gatsby-remark-responsive-iframe": "^2.0.5",

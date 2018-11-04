@@ -111,6 +111,19 @@ module.exports = {
             resolve: 'gatsby-remark-responsive-iframe',
             options: { wrapperStyle: 'margin-bottom: 1.0725rem' },
           },
+          {
+            resolve: 'gatsby-remark-embed-gist',
+            options: {
+              // Optional:
+    
+              // the github handler whose gists are to be accessed
+              username: 'auronmatrix',
+    
+              // a flag indicating whether the github default gist css should be included or not
+              // default: true
+              includeDefaultCss: true
+            }
+          },
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',

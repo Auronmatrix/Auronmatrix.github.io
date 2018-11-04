@@ -17,14 +17,6 @@ description: "Setting up and deploying your first bitcoin full node with docker 
 
 While developing different blockchain tools, the requirement of spinning up a new full node for testing comes up quite often.
 
-In order to speed up this process, I've come to build and run bitcoin-core inside a docker container with the following config:
+In order to speed up this process, I've come to build and run bitcoin-core inside a docker container. I've found the images maintained by [@ruimarinho](https://github.com/ruimarinho) very usefull and working straight OOTB.
 
-```
-FROM alpine
-
-RUN apk-install bitcoin
-
-CMD "bitcoind"
-```
-
-This is great
+https://github.com/ruimarinho/docker-bitcoin-core
