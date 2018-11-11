@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Aubrey Oosthuizen Blog]]></title><description><![CDATA[Thoughts on coding, crypto and other tidbits.]]></description><link>https://lumen.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sun, 04 Nov 2018 18:41:15 GMT</lastBuildDate><item><title><![CDATA[Running your own Bitcoin full node with Docker]]></title><description><![CDATA[Setting up and deploying your first bitcoin full node with docker and docker-compose]]></description><link>https://lumen.netlify.com/posts/deploying-bitcoin-with-docker/</link><guid isPermaLink="false">https://lumen.netlify.com/posts/deploying-bitcoin-with-docker/</guid><pubDate>Thu, 18 Oct 2018 16:51:00 GMT</pubDate><content:encoded>&lt;h2&gt;Setting up&lt;/h2&gt;
-&lt;p&gt;While developing different blockchain tools, the requirement of spinning up a new full node for testing comes up quite often.&lt;/p&gt;
-&lt;p&gt;In order to speed up this process, I’ve come to build and run bitcoin-core inside a docker container. I’ve found the images maintained by &lt;a href=&quot;https://github.com/ruimarinho&quot;&gt;@ruimarinho&lt;/a&gt; very usefull and working straight OOTB.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ruimarinho/docker-bitcoin-core&quot;&gt;https://github.com/ruimarinho/docker-bitcoin-core&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Digging into the Sieve of Eratosthenes]]></title><description><![CDATA[Quick look at a simple, ancient method for finding primes]]></description><link>https://lumen.netlify.com/posts/sieve-of-eratosthenes/</link><guid isPermaLink="false">https://lumen.netlify.com/posts/sieve-of-eratosthenes/</guid><pubDate>Thu, 18 Oct 2018 16:51:00 GMT</pubDate><content:encoded>&lt;h2&gt;Sieve of Eratosthenes&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Aubrey Oosthuizen Blog]]></title><description><![CDATA[Thoughts on coding, crypto and other tidbits.]]></description><link>https://lumen.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Sun, 11 Nov 2018 13:15:05 GMT</lastBuildDate><item><title><![CDATA[Digging into the Sieve of Eratosthenes]]></title><description><![CDATA[Quick look at a simple, ancient method for finding primes]]></description><link>https://lumen.netlify.com/posts/sieve-of-eratosthenes/</link><guid isPermaLink="false">https://lumen.netlify.com/posts/sieve-of-eratosthenes/</guid><pubDate>Thu, 18 Oct 2018 16:51:00 GMT</pubDate><content:encoded>&lt;h2&gt;Sieve of Eratosthenes&lt;/h2&gt;
 &lt;p&gt;After a little &lt;a href=&quot;https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes&quot;&gt;Wikipedia&lt;/a&gt; rabbit hole session I came across an interesting method for calculating all primes up to a given limit:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt; In mathematics, the sieve of Eratosthenes is a simple, ancient algorithm for finding all prime numbers up to any given limit.
@@ -172,4 +169,279 @@
       &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Running your own Bitcoin full node with Docker]]></title><description><![CDATA[Running your own bitcoind full node with docker/docker-compose]]></description><link>https://lumen.netlify.com/posts/deploying-bitcoind-with-docker-and-compose/</link><guid isPermaLink="false">https://lumen.netlify.com/posts/deploying-bitcoind-with-docker-and-compose/</guid><pubDate>Mon, 15 Oct 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Running your own bitcoind full node with docker/docker-compose&lt;/h2&gt;
+&lt;p&gt;While developing different bitcoin tools, the requirement of spinning up a new full node for testing comes up quite often.&lt;/p&gt;
+&lt;p&gt;In order to speed up this process, I’ve come to build and run bitcoin-core inside a docker container quite often.&lt;/p&gt;
+&lt;p&gt;I’ve created a bootstrapping repo &lt;a href=&quot;https://github.com/Auronmatrix/bitcoind-docker&quot;&gt;bitcoind-docker&lt;/a&gt; based on the work of &lt;a href=&quot;https://github.com/ruimarinho&quot;&gt;@ruimarinho&lt;/a&gt; adding some small fixes, docker-compose and rpcauth script for generating rpc user and the example bitcoin.conf file from bitcoin-core. &lt;/p&gt;
+&lt;h4&gt;1. Clone:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git clone https://github.com/Auronmatrix/bitcoind-docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;cd bitcoind-docker&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2. Configure&lt;/h4&gt;
+&lt;p&gt;Configure the bitcoin.conf file to be relevant to your requirements. Commonly used commands include -server=1, -printtoconsole=1 and -regtest=1. These commands can also be added to the compose file under the &lt;code class=&quot;language-text&quot;&gt;command&lt;/code&gt; property.&lt;/p&gt;
+&lt;p&gt;See the bitcoin.conf for details on available commands.&lt;/p&gt;
+&lt;h4&gt;3. Enable RPC&lt;/h4&gt;
+&lt;p&gt;If you wish to enable the bitcoind rpc server, you should generate the login credentials for the RPC-USER.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;cd rpcauth&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;python3 rpcauth.py yourusername yoursupersecretpassword&lt;/code&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Copy output to &lt;code class=&quot;language-text&quot;&gt;bitcoin.conf&lt;/code&gt; or add as command to &lt;code class=&quot;language-text&quot;&gt;docker-compose.yml&lt;/code&gt;. Make sure you set &lt;code class=&quot;language-text&quot;&gt;-server=1&lt;/code&gt; in either and check out the rpc binding options for allowing rpc access from outside the container.&lt;/p&gt;
+&lt;h4&gt;4. Building and running&lt;/h4&gt;
+&lt;p&gt;Once the config has been set up, run the container&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;docker-compose build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;docker-compose up -d&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;View the logs with &lt;code class=&quot;language-text&quot;&gt;docker-compose logs -f&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This should be enough to get you started with running your own bitcoin node. Make sure to study up the different configuration options. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Setting up bitcoin multisig with bitcoin-cli]]></title><description><![CDATA[Setup and sign bitcoin multisig address with bitcoin-cli]]></description><link>https://lumen.netlify.com/posts/bitcoin-multisig-cli/</link><guid isPermaLink="false">https://lumen.netlify.com/posts/bitcoin-multisig-cli/</guid><pubDate>Tue, 10 Jul 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;After a friend asked me how multisig in bitcoin works, I did a little experimenting and found the following method for setting up a multisig address with bitcoin-cli, generating a transaction and signing it with 2/3 before broadcasting it.&lt;/p&gt;
+&lt;h3&gt;Disclaimer&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This technique should not be used for setting up real addresses. It creates 3 addresses in the same wallet (which makes no sense in the real world). Therefore, this post is merely for educational purposes (mostly mine).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;0. Setup&lt;/h3&gt;
+&lt;p&gt;Prerequisite: Docker + docker-compose (&lt;a href=&quot;https://docs.docker.com/docker-for-mac/install/&quot;&gt;Mac&lt;/a&gt;, &lt;a href=&quot;https://docs.docker.com/install/#supported-platforms&quot;&gt;Platforms&lt;/a&gt;) &lt;/p&gt;
+&lt;h3&gt;Setup your bitcoind node&lt;/h3&gt;
+&lt;ol start=&quot;0&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Get starter (&lt;a href=&quot;https://github.com/Auronmatrix/bitcoind-docker&quot;&gt;bitcoind-docker&lt;/a&gt;)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you can use git, you can clone the repo otherwise simply download the zip file, extract it and open the folder in your terminal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add the following content to the bitcoin.conf file which enables RPC and sets our node to use testnet&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;printtoconsole=1
+testnet=1
+server=1
+rpcport=8332
+prune=2000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;run &lt;code class=&quot;language-text&quot;&gt;docker-compose up -d&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;open a new terminal tab (cmd+t)&lt;/li&gt;
+&lt;li&gt;run &lt;code class=&quot;language-text&quot;&gt;docker-compose logs -f&lt;/code&gt; and wait for the node to fully sync&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You will need to wait for your node to fully sync.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; *** Note: To stop the docker-container run &lt;code class=&quot;language-text&quot;&gt;docker-compose down&lt;/code&gt;. To delete the blockchain content delete the &lt;code class=&quot;language-text&quot;&gt;data&lt;/code&gt; folder in the bitcoin-node folder&lt;/p&gt;
+&lt;h3&gt;Shell into your node&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;run &lt;code class=&quot;language-text&quot;&gt;docker ps&lt;/code&gt; and check the docker container id (C_ID) of your bitcoin node&lt;/li&gt;
+&lt;li&gt;run &lt;code class=&quot;language-text&quot;&gt;docker exec -it C_ID /bin/sh&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now you’re inside the docker container with a fully synced bitcoind node on testnet.&lt;/p&gt;
+&lt;h3&gt;1. Create addresses&lt;/h3&gt;
+&lt;p&gt;*** Note: Wherever you see these greater than/smaller brackets, you need to replace the value with some output/variable with the name inside the bracked &lt;code class=&quot;language-text&quot;&gt;&amp;lt;VARIABLE&amp;gt;&lt;/code&gt;. You can see the Variable names next to the example output e.g. &lt;code class=&quot;language-text&quot;&gt;Example Output: TXID&lt;/code&gt; will show the value you need to substitute everywhere where you see &lt;code class=&quot;language-text&quot;&gt;&amp;lt;TXID&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You will need to create a couple (n) new bitcoin addresses to use in the multisig address. In reality, these would not be created on the same machine/node using the same wallet, but by different parties.&lt;/p&gt;
+&lt;p&gt;*** Where &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; is the number of addresses you want to use in the multisig address&lt;/p&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-text&quot;&gt;bitcoin-cli getnewaddress&lt;/code&gt; * n&lt;/p&gt;
+&lt;p&gt;Example Output: ADDR(n)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;2N3fquuLoTkecwMpBmLiyGzF18R7LLn2dWW&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will need some money to send to the multisig address. For educational purposes, let’s send some coins to our new &lt;code class=&quot;language-text&quot;&gt;ADDR(n)&lt;/code&gt; address first and then send it on to our multisig address once it has been created.&lt;/p&gt;
+&lt;p&gt;Visit: &lt;a href=&quot;https://testnet.manu.backend.hamburg/faucet&quot;&gt;A Testnet Faucet&lt;/a&gt; and send some coins to an address you’ve just created.&lt;/p&gt;
+&lt;p&gt;*** You can check if the transaction is confirmed by using &lt;code class=&quot;language-text&quot;&gt;bitcoin-cli gettransaction &amp;lt;FAUCET_TXID&amp;gt;&lt;/code&gt;, where FAUCET_TXID is the transaction ID returned by the faucet&lt;/p&gt;
+&lt;h4&gt;2. Get address Pubkey’s&lt;/h4&gt;
+&lt;p&gt;We will need to get the public keys for all the addresses we want to use in our multisig address. To get the public key of an address use run the following cli command:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli validateaddress &amp;lt;ADDR(n)&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;*** Where ADDR(n) is 0..n of the addresses we just generated&lt;/p&gt;
+&lt;p&gt;Example Output: ADDR(n)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;isvalid&amp;quot;: true,
+  &amp;quot;address&amp;quot;: &amp;quot;2N3fquuLoTkecwMpBmLiyGzF18R7LLn2dWW&amp;quot;,
+  &amp;quot;scriptPubKey&amp;quot;: &amp;quot;a91472593aaa24c469f1d09af92e13268e2ec8131b7d87&amp;quot;,
+  &amp;quot;ismine&amp;quot;: true,
+  &amp;quot;iswatchonly&amp;quot;: false,
+  &amp;quot;isscript&amp;quot;: true,
+  &amp;quot;iswitness&amp;quot;: false,
+  &amp;quot;script&amp;quot;: &amp;quot;witness_v0_keyhash&amp;quot;,
+  &amp;quot;hex&amp;quot;: &amp;quot;001492dea8f0ae7ed7d17cdd71efbd42244457a04a7f&amp;quot;,
+  &amp;quot;pubkey&amp;quot;: &amp;quot;02d55b98c30f17bb20a01cbd3e2a58cb607fc088d9b12b2415e09cc122c2827b24&amp;quot;, // &amp;lt;-- Note this
+  &amp;quot;embedded&amp;quot;: {
+    &amp;quot;isscript&amp;quot;: false,
+    &amp;quot;iswitness&amp;quot;: true,
+    &amp;quot;witness_version&amp;quot;: 0,
+    &amp;quot;witness_program&amp;quot;: &amp;quot;92dea8f0ae7ed7d17cdd71efbd42244457a04a7f&amp;quot;,
+    &amp;quot;pubkey&amp;quot;: &amp;quot;02d55b98c30f17bb20a01cbd3e2a58cb607fc088d9b12b2415e09cc122c2827b24&amp;quot;,
+    &amp;quot;address&amp;quot;: &amp;quot;tb1qjt023u9w0mtazlxaw8hm6s3yg3t6qjnlfqdnz5&amp;quot;,
+    &amp;quot;scriptPubKey&amp;quot;: &amp;quot;001492dea8f0ae7ed7d17cdd71efbd42244457a04a7f&amp;quot;
+  },
+  &amp;quot;addresses&amp;quot;: [
+    &amp;quot;tb1qjt023u9w0mtazlxaw8hm6s3yg3t6qjnlfqdnz5&amp;quot;
+  ],
+  &amp;quot;account&amp;quot;: &amp;quot;&amp;quot;,
+  &amp;quot;timestamp&amp;quot;: 1531559244,
+  &amp;quot;hdkeypath&amp;quot;: &amp;quot;m/0&amp;#39;/0&amp;#39;/5&amp;#39;&amp;quot;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Take note of the pubkey for each address for example here is the &lt;code class=&quot;language-text&quot;&gt;address : pubkey&lt;/code&gt; for mine:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;2N3fquuLoTkecwMpBmLiyGzF18R7LLn2dWW : 02d55b98c30f17bb20a01cbd3e2a58cb607fc088d9b12b2415e09cc122c2827b24&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;3. Create MULTISIG Address&lt;/h3&gt;
+&lt;p&gt;Once we have the public key (pubkey) for each address we want to use in the multisig address we can create the multisig address with the following command: &lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli createmultisig &amp;lt;REQUIRED_SIGS&amp;gt; &amp;quot;[\&amp;quot;&amp;lt;PUBKEY(0)&amp;gt;\&amp;quot;, \&amp;quot;&amp;lt;PUBKEY(1)&amp;gt;\&amp;quot;, ... \&amp;quot;&amp;lt;PUBKEY(n)&amp;gt;\&amp;quot;]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;*** &amp;#x3C;REQUIRED_SIGS&gt; = replace this with the actual number of signatures required e.g. for a 3 of 5 address, this parameter would be &lt;code class=&quot;language-text&quot;&gt;3&lt;/code&gt; and the 0..n array afterwards would be the pubkey of addresses 0 to 5&lt;/p&gt;
+&lt;p&gt;Example Output: MULTISIGADDR / REDEEM_SCRIPT&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;address&amp;quot;: &amp;quot;2NDhNJBynBdrFFkXJJscPhnocwLiiyzoEtE&amp;quot;,
+  &amp;quot;redeemScript&amp;quot;: &amp;quot;522103c8d1554f1029e6fa737b086b408f56a4f468541671230a4288e1f0290051aba621023af945dee9e7fdad745b62b817347eaf0efef84f752f03fbb80a82de61bdd6f62103f18f621896dd4954b593c56fe74530c139c54e372c52a43c15a5a4e89d26cf9153ae&amp;quot;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now we have a new multisig address (MULTISIGADDR) &lt;code class=&quot;language-text&quot;&gt;2NDhNJBynBdrFFkXJJscPhnocwLiiyzoEtE&lt;/code&gt; with the script to redeem any bitcoin sent to this address (REDEEM_SCRIPT) &lt;code class=&quot;language-text&quot;&gt;522103c...153ae&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;4. Send some money to the multisig address&lt;/h3&gt;
+&lt;p&gt;Let’s send some money from our address we created in step 1 to our new multisig address:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli sendtoaddress &amp;lt;MULTISIGADDR&amp;gt; &amp;lt;AMMOUNT&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: TXID&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;5b823105e7d1d6d0c126cb7c3f263de970690d514d846eb317899df2e59ddf2f&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli gettransaction &amp;lt;TXID&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: TX&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;amount&amp;quot;: -0.50000000,
+  &amp;quot;fee&amp;quot;: -0.00000241,
+  &amp;quot;confirmations&amp;quot;: 0,
+  &amp;quot;trusted&amp;quot;: true,
+  &amp;quot;txid&amp;quot;: &amp;quot;TXID&amp;quot;,
+  &amp;quot;walletconflicts&amp;quot;: [
+  ],
+  &amp;quot;time&amp;quot;: 1531660754,
+  &amp;quot;timereceived&amp;quot;: 1531660754,
+  &amp;quot;bip125-replaceable&amp;quot;: &amp;quot;no&amp;quot;,
+  &amp;quot;details&amp;quot;: [
+    {
+      &amp;quot;account&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;address&amp;quot;: &amp;quot;2NDhNJBynBdrFFkXJJscPhnocwLiiyzoEtE&amp;quot;,
+      &amp;quot;category&amp;quot;: &amp;quot;send&amp;quot;,
+      &amp;quot;amount&amp;quot;: -0.50000000,
+      &amp;quot;vout&amp;quot;: 0,
+      &amp;quot;fee&amp;quot;: -0.00000241,
+      &amp;quot;abandoned&amp;quot;: false
+    }
+  ],
+  &amp;quot;hex&amp;quot;: &amp;quot;0200000000010191ea8abf09f4acc6f549a2623524597640a006cac030a01c8b119f1957389f2501000000171600145741edc69bb806dffed747e41dcd8d08bf96d089feffffff0280f0fa020000000017a914e054443696a6bcd99e732480487f7168e1afa6fa87cfe0e4000000000017a9148337d4673ef5d665e33c67f6a9751ee5074867188702463043021f60da1356671f1eefa5c872bce2ee0a624ac94e89eae07b7446684b02efa47802203538911d9109d209ec1d8d75cf5f2140aa8ba21d125bee60685142c0eabefd760121035717f188ccb1f6c331b17a170ed9588dc15308ee589622f41968f915f7b2b9e971a71400&amp;quot;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;*** Note: Wait for the transaction to confirm before trying to spend it in another input&lt;/p&gt;
+&lt;h3&gt;5. Create SEND_TO and CHANGE addresses&lt;/h3&gt;
+&lt;p&gt;Now the multisig address has received some funding (confirmed on chain), let’s try to create a transaction that spends these coins to some new addresses.&lt;/p&gt;
+&lt;p&gt;However, first we should create 2 new addresses, one to receive money from the multisig address, and another to mimic a change address.&lt;/p&gt;
+&lt;p&gt;*** Note: Since we are using createrawtransaction later on to create our transaction, no change address will be generated automatically, so it is important we generate it ourselves, see &lt;a href=&quot;https://bitcoin.org/en/developer-examples#simple-raw-transaction&quot;&gt;bitcoin.org&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli getnewaddress&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Example Output: MULTISIG&lt;em&gt;SEND&lt;/em&gt;TO_ADDR&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;2MudNu8VFhb1McRMuEBQa2c1e87FpSji8Qs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli getnewaddress&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Example Output: MULTISIG&lt;em&gt;CHANGE&lt;/em&gt;ADDR&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;2Mtbs7uSqcphyByHadbmtifr78bJpkpZpCJ&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;6. Understanding VIN/VOUT&lt;/h3&gt;
+&lt;p&gt;In order to send coins from our multisig address to another one we need to understand VIN and VOUT.&lt;/p&gt;
+&lt;p&gt;For example. If you look at the following &lt;a href=&quot;https://blockexplorer.com/tx/cafafbae95de6734b2ebffeff37c9a23fcc3977b70fbf856518703bbe0e41015&quot;&gt;transaction&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It has 4 inputs (VIN: 0, 1, 2, 3, 4) that spends coins to 2 outputs (VOUT: 0, 1). The VOUT for the output for coins to &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;1NQq4PsRYRw2Gjcqd4BaH4tUaTFT9scn76&lt;/code&gt; = 0 &lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;1NtiqTLrVGMrMV8qDbi5L12bCQ6oGV5sKh&lt;/code&gt; = 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It is important to understand this since you need to use the correct VOUT of the transaction sending coins to our multisig address in order to spend them again.&lt;/p&gt;
+&lt;h3&gt;7. Create RAW transaction&lt;/h3&gt;
+&lt;p&gt; To send money from our multisig addredss we need to use the &lt;code class=&quot;language-text&quot;&gt;&amp;lt;TXID&amp;gt;&lt;/code&gt; of the transaction where we sent money TO our multisig address. For the &lt;code class=&quot;language-text&quot;&gt;&amp;lt;VOUT&amp;gt;&lt;/code&gt;, it should be the index (starting at 0) of the output of that funding transaction that sent coins to our multisig address. Since I funded my multisig address with 0.5 BTC, I’m sending 0.45 to &lt;code class=&quot;language-text&quot;&gt;&amp;lt;MULTISIG_SEND_TO_ADDR&amp;gt;&lt;/code&gt; and 0.049 to &lt;code class=&quot;language-text&quot;&gt;&amp;lt;MULTISIG_CHANGE_ADDR&amp;gt;&lt;/code&gt;, leaving 0.001 BTC to be claimed as fee by the miner.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli createrawtransaction &amp;quot;[{\&amp;quot;txid\&amp;quot;:\&amp;quot;&amp;lt;TXID&amp;gt;\&amp;quot;, \&amp;quot;vout\&amp;quot;: 0 }]&amp;quot; &amp;quot;{ \&amp;quot;&amp;lt;MULTISIG_SEND_TO_ADDR&amp;gt;\&amp;quot;:0.45, \&amp;quot;&amp;lt;MULTISIG_CHANGE_ADDR&amp;gt;\&amp;quot;: 0.049 }&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: RAW&lt;em&gt;TX&lt;/em&gt;HEX&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;02000000012fdf9de5f29d8917b36e844d510d6970e93d263f7ccb26c1d0d6d1e70531825b0000000000ffffffff0240a5ae020000000017a91423c27aee8feaf001906c0aab56a1c9340b4e8d6d87a0c44a000000000017a914e054443696a6bcd99e732480487f7168e1afa6fa8700000000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To see the details of this raw transaction run:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli decoderawtransaction RAW_TX_HEX&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: RAW&lt;em&gt;TX / SCRIPT&lt;/em&gt;PUB&lt;em&gt;KEY&lt;/em&gt;HEX&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;txid&amp;quot;: &amp;quot;730ab6e3be390979268b9a1bd6fbd966d874844d1896d99bef69380f154efd93&amp;quot;,
+  &amp;quot;hash&amp;quot;: &amp;quot;730ab6e3be390979268b9a1bd6fbd966d874844d1896d99bef69380f154efd93&amp;quot;,
+  &amp;quot;version&amp;quot;: 2,
+  &amp;quot;size&amp;quot;: 115,
+  &amp;quot;vsize&amp;quot;: 115,
+  &amp;quot;locktime&amp;quot;: 0,
+  &amp;quot;vin&amp;quot;: [
+    {
+      &amp;quot;txid&amp;quot;: &amp;quot;5b823105e7d1d6d0c126cb7c3f263de970690d514d846eb317899df2e59ddf2f&amp;quot;,
+      &amp;quot;vout&amp;quot;: 0,
+      &amp;quot;scriptSig&amp;quot;: {
+        &amp;quot;asm&amp;quot;: &amp;quot;&amp;quot;,
+        &amp;quot;hex&amp;quot;: &amp;quot;&amp;quot;
+      },
+      &amp;quot;sequence&amp;quot;: 4294967295
+    }
+  ],
+  &amp;quot;vout&amp;quot;: [
+    {
+      &amp;quot;value&amp;quot;: 0.45000000,
+      &amp;quot;n&amp;quot;: 0,
+      &amp;quot;scriptPubKey&amp;quot;: {
+        &amp;quot;asm&amp;quot;: &amp;quot;OP_HASH160 23c27aee8feaf001906c0aab56a1c9340b4e8d6d OP_EQUAL&amp;quot;,
+        &amp;quot;hex&amp;quot;: &amp;quot;a91423c27aee8feaf001906c0aab56a1c9340b4e8d6d87&amp;quot;, // &amp;lt;-- This is the SCRIPT_PUB_KEY_HEX
+        &amp;quot;reqSigs&amp;quot;: 1,
+        &amp;quot;type&amp;quot;: &amp;quot;scripthash&amp;quot;,
+        &amp;quot;addresses&amp;quot;: [
+          &amp;quot;2MvWJcigHkgMA8TRtXBhzD7whRfUsBwArU3&amp;quot;
+        ]
+      }
+    },
+    {
+      &amp;quot;value&amp;quot;: 0.04900000,
+      &amp;quot;n&amp;quot;: 1,
+      &amp;quot;scriptPubKey&amp;quot;: {
+        &amp;quot;asm&amp;quot;: &amp;quot;OP_HASH160 e054443696a6bcd99e732480487f7168e1afa6fa OP_EQUAL&amp;quot;,
+        &amp;quot;hex&amp;quot;: &amp;quot;a914e054443696a6bcd99e732480487f7168e1afa6fa87&amp;quot;, // &amp;lt;-- This is the SCRIPT_PUB_KEY_HEX
+        &amp;quot;reqSigs&amp;quot;: 1,
+        &amp;quot;type&amp;quot;: &amp;quot;scripthash&amp;quot;,
+        &amp;quot;addresses&amp;quot;: [
+          &amp;quot;2NDhNJBynBdrFFkXJJscPhnocwLiiyzoEtE&amp;quot;
+        ]
+      }
+    }
+  ]
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;8. Sign the transaction&lt;/h3&gt;
+&lt;p&gt;To sign the transaction, you need the private key of at least m/n public keys used to create the address, where &lt;code class=&quot;language-text&quot;&gt;m&lt;/code&gt; is the &lt;code class=&quot;language-text&quot;&gt;&amp;lt;REQUIRED_SIGS&amp;gt;&lt;/code&gt; used to create the address. &lt;/p&gt;
+&lt;p&gt;In order to get the private key of one of our generate addresses run:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli dumpprivkey &amp;lt;ADDR(n)&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: PRIVKEY(n)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;cUyDg4c17DQPXjVdY2wum22fkMSMcHhrQKWgQ75vFPJupkYsf4qT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once we have &lt;code class=&quot;language-text&quot;&gt;m&lt;/code&gt; (in the example 2) private keys from the addresses used to create the multisig address, we can now sign the raw transaction:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli signrawtransaction &amp;lt;RAW_TX_HEX&amp;gt; &amp;quot;[{\&amp;quot;txid\&amp;quot;:\&amp;quot;&amp;lt;TXID&amp;gt;\&amp;quot;, \&amp;quot;vout\&amp;quot;: &amp;lt;VOUT&amp;gt;, \&amp;quot;scriptPubKey\&amp;quot;: \&amp;quot;&amp;lt;SCRIPT_PUB_KEY_HEX&amp;gt;\&amp;quot;, \&amp;quot;redeemScript\&amp;quot;:\&amp;quot;&amp;lt;REDEEM_SCRIPT&amp;gt;\&amp;quot; }]&amp;quot; &amp;quot;[\&amp;quot;&amp;lt;PRIVKEY(0)&amp;gt;\&amp;quot;, \&amp;quot;&amp;lt;PRIVKEY(1)&amp;gt;\&amp;quot;]&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;*** Note: From what I could tell, the &lt;code class=&quot;language-text&quot;&gt;&amp;lt;SCRIPT_PUB_KEY_HEX&amp;gt;&lt;/code&gt; isn’t really used. Might be wrong about that&lt;/p&gt;
+&lt;p&gt;Example Output: SIGNED&lt;em&gt;RAW&lt;/em&gt;TX &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;hex&amp;quot;: &amp;quot;02000000012fdf9de5f29d8917b36e844d510d6970e93d263f7ccb26c1d0d6d1e70531825b00000000fdfe0000483045022100b54e338a6d049fa21b329e390eb0c906c85243a7f92049342c37da04c378c46e0220314c7723657d5ce172d1bc1b603c1db4cb376208016a3a9edaa20a13ac94fb950148304502210083f8f845899b59381e68e889ed7eeb9b2e7ca7bb39b2e7c79fab52fff3bce1310220582be5227ba69ec0a03f327746bed569dfb70b402a657c627d8c34a6218e7505014c69522103c8d1554f1029e6fa737b086b408f56a4f468541671230a4288e1f0290051aba621023af945dee9e7fdad745b62b817347eaf0efef84f752f03fbb80a82de61bdd6f62103f18f621896dd4954b593c56fe74530c139c54e372c52a43c15a5a4e89d26cf9153aeffffffff0240a5ae020000000017a91423c27aee8feaf001906c0aab56a1c9340b4e8d6d87a0c44a000000000017a914e054443696a6bcd99e732480487f7168e1afa6fa8700000000&amp;quot;,
+  &amp;quot;complete&amp;quot;: true
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Use the hex code as &lt;code class=&quot;language-text&quot;&gt;&amp;lt;SIGNED_RAW_TX_HEX&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;9. Send the RAW transaction&lt;/h3&gt;
+&lt;p&gt;Now we have a valid and signed raw transaction, we can now broadcast this to the bitcoin network.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli sendrawtransaction &amp;lt;SIGNED_RAW_TX_HEX&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: MULTISIG_TXID&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;b964bfc624e4540b180a19e68eb25a6dcb25a3c5545513f82334dda363d3c0d0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check to see if the transaction is on the network&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;bitcoin-cli gettransaction &amp;lt;MULTISIG_TXID&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Example Output: FINAL_TX&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;amount&amp;quot;: 0.45000000,
+  &amp;quot;confirmations&amp;quot;: 0,
+  &amp;quot;trusted&amp;quot;: false,
+  &amp;quot;txid&amp;quot;: &amp;quot;b964bfc624e4540b180a19e68eb25a6dcb25a3c5545513f82334dda363d3c0d0&amp;quot;,
+  &amp;quot;walletconflicts&amp;quot;: [
+  ],
+  &amp;quot;time&amp;quot;: 1531668769,
+  &amp;quot;timereceived&amp;quot;: 1531668769,
+  &amp;quot;bip125-replaceable&amp;quot;: &amp;quot;no&amp;quot;,
+  &amp;quot;details&amp;quot;: [
+    {
+      &amp;quot;account&amp;quot;: &amp;quot;test&amp;quot;,
+      &amp;quot;address&amp;quot;: &amp;quot;2MvWJcigHkgMA8TRtXBhzD7whRfUsBwArU3&amp;quot;,
+      &amp;quot;category&amp;quot;: &amp;quot;receive&amp;quot;,
+      &amp;quot;amount&amp;quot;: 0.45000000,
+      &amp;quot;label&amp;quot;: &amp;quot;test&amp;quot;,
+      &amp;quot;vout&amp;quot;: 0
+    }
+  ],
+  &amp;quot;hex&amp;quot;: &amp;quot;02000000012fdf9de5f29d8917b36e844d510d6970e93d263f7ccb26c1d0d6d1e70531825b00000000fdfe0000483045022100b54e338a6d049fa21b329e390eb0c906c85243a7f92049342c37da04c378c46e0220314c7723657d5ce172d1bc1b603c1db4cb376208016a3a9edaa20a13ac94fb950148304502210083f8f845899b59381e68e889ed7eeb9b2e7ca7bb39b2e7c79fab52fff3bce1310220582be5227ba69ec0a03f327746bed569dfb70b402a657c627d8c34a6218e7505014c69522103c8d1554f1029e6fa737b086b408f56a4f468541671230a4288e1f0290051aba621023af945dee9e7fdad745b62b817347eaf0efef84f752f03fbb80a82de61bdd6f62103f18f621896dd4954b593c56fe74530c139c54e372c52a43c15a5a4e89d26cf9153aeffffffff0240a5ae020000000017a91423c27aee8feaf001906c0aab56a1c9340b4e8d6d87a0c44a000000000017a914e054443696a6bcd99e732480487f7168e1afa6fa8700000000&amp;quot;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That’s it. &lt;/p&gt;
+&lt;p&gt;We have successfully, created a multisig address, funded it with some coins, created a raw transaction spending the coins from the multisig address, signed it using 2/3 private keys and broadcast the transaction to the bitcoin network&lt;/p&gt;</content:encoded></item></channel></rss>
